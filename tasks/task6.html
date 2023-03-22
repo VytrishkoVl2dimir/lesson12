@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home Work</title>
+</head>
+
+<body>
+	<h2>Задача 6</h2>
+	<h3>Умова задачі</h3>
+	<p>
+		Задача 6 - Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я
+		довжиною 5 символів і під яким індексом
+	</p>
+
+	<h3>Розв'язок</h3>
+	<script>
+		//========================================================================================================================================================
+		// Функція сортування бульбашкою по довжині імені
+		function bubbleSort(array) {
+			let arr = JSON.parse(JSON.stringify(array))
+			let changed
+			do {
+				changed = false
+				for (let i = 1; i < arr.length; i++) {
+					if (arr[i - 1].length > arr[i].length) {
+						let temp = arr[i - 1]
+						arr[i - 1] = arr[i]
+						arr[i] = temp
+						changed = true
+					}
+				}
+			} while (changed)
+			return arr
+		}
+		//========================================================================================================================================================
+		// Функція бінарного пошуку(визначає, чи є потрібний елемент в масиві ?)
+		function includes_binarySearch(arr, nameLength) {
+			let start = 0
+			let end = arr.length - 1
+			while (start <= end) {
+				const middle = Math.floor((start + end) / 2)
+				if (arr[middle].length === nameLength) return true
+				if (arr[middle].length < nameLength) start = middle + 1
+				if (arr[middle].length > nameLength) end = middle - 1
+			}
+			return false
+		}
+		// //========================================================================================================================================================
+		// Функція бінарного пошуку (визначає, індекс потрібного елементу в масиві)
+		function fiendIndex_binarySearch(arr, nameLength) {
+			let start = 0
+			let end = arr.length - 1
+			while (start <= end) {
+				const middle = Math.floor((start + end) / 2)
+				if (arr[middle].length === nameLength) return middle
+				if (arr[middle].length < nameLength) start = middle + 1
+				if (arr[middle].length > nameLength) end = middle - 1
+			}
+			return -1
+		}
+		//===============================================================================================================================================
+		const nameArray = ['Ivan', 'Anton', 'Olga', 'Galina', 'Maksim', 'Piter', 'Anna', 'Vladislav', 'Konstantin']
+		console.log(nameArray) // Вивід початкового масиву
+		const nameArray_Sorted = bubbleSort(nameArray)
+		console.log(nameArray_Sorted) // Вивід відсортованого масиву
+		const nameIsOfArray = includes_binarySearch(nameArray_Sorted, 5) // За допомогою бінарного пошуку визначається, чиє імя довжиною 5 символів?
+		console.log(nameIsOfArray)
+		const indexNameIsOfArray = fiendIndex_binarySearch(nameArray_Sorted, 5) // За допомогою бінарного пошуку визначається індекс імені довжиною 5 символів в масиві.
+		console.log(indexNameIsOfArray)
+
+	</script>
+	<style>
+		h2 {
+			color: #08368b;
+		}
+
+		h3 {
+			color: #06700f;
+		}
+	</style>
+</body>
+
+</html>
